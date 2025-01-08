@@ -1,0 +1,69 @@
+/* General Body Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #f8ffd2, #eafd7f); /* Soft pastel gradient */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    color: #444;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Center content horizontally */
+}
+
+/* Game Title */
+h1 {
+    color: #3fb400; /* Warm coral color */
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px #fff;
+}
+
+/* Buttons Wrapper */
+.button-container {
+    display: flex; /* Align buttons horizontally */
+    justify-content: center;
+    gap: 15px; /* Space between buttons */
+    margin-top: 20px;
+}
+
+/* Buttons Styling */
+button {
+    background-color: #62c089; /* Soft pink color */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px; /* Reduced padding for smaller buttons */
+    font-size: 1rem;
+    cursor: pointer;
+    width: 120px; /* Fixed width for consistency */
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    background-color: #ff6f61; /* Darker coral for hover effect */
+    transform: scale(1.1); /* Slight zoom effect */
+    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Placeholder for Results */
+#result {
+    background-color: #fdfd64; /* Light yellow background */
+    color: #444;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Footer for Attribution or Additional Info */
+footer {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    color: #666;
+}
