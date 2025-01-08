@@ -4,26 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
-    <!-- Link to the CSS file -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Rock Paper Scissors</h1>
-    <!-- Game Buttons -->
-    <div class="button-container">
-        <button id="rock">Rock</button>
-        <button id="paper">Paper</button>
-        <button id="scissors">Scissors</button>
+    <h1>Rock Paper Scissors Game</h1>
+    <div id="buttons-container">
+        <button class="choice-button" id="rock">Rock</button>
+        <button class="choice-button" id="paper">Paper</button>
+        <button class="choice-button" id="scissors">Scissors</button>
     </div>
-    <!-- Placeholder for Results -->
-    <p id="result">Make your choice!</p>
-    <!-- Optional Footer -->
-    <footer>
-        <p>Designed with 💚 by SHREYA for a fun Rock-Paper-Scissors experience!</p>
-    </footer>
-    <!-- Link to the JavaScript file -->
+    <div id="game-info">
+        <p id="player-choice">Player's Choice: </p>
+        <p id="computer-choice">Computer's Choice: </p>
+        <p id="game-result">Result: </p>
+        <p id="player-score">Player: 0</p>
+        <p id="computer-score">Computer: 0</p>
+    </div>
+    <button id="reset">Reset</button>
     <script src="script.js"></script>
 </body>
 </html>
-
-

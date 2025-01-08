@@ -49,6 +49,47 @@ button:hover {
     box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.3);
 }
 
+/* Game Information Section */
+#game-info {
+    background-color: #fdfd64; /* Light yellow background */
+    color: #444;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    width: 60%; /* Wider box for better spacing */
+    max-width: 500px;
+}
+
+/* Highlighted Result */
+#game-result {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-top: 15px;
+}
+
+/* Reset Button */
+#reset {
+    background-color: #ffadad; /* Light coral red for reset */
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#reset:hover {
+    background-color: #ff6f61; /* Darker coral for hover effect */
+    transform: scale(1.1);
+    box-shadow: 4px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
 /* Placeholder for Results */
 #result {
     background-color: #fdfd64; /* Light yellow background */
@@ -66,4 +107,19 @@ footer {
     margin-top: 30px;
     font-size: 0.8rem;
     color: #666;
+}
+
+/* Score Display */
+#player-score,
+#computer-score {
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
+
+/* Choices Display */
+#player-choice,
+#computer-choice {
+    margin-top: 10px;
+    font-size: 1rem;
 }
