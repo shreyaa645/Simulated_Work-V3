@@ -1,69 +1,58 @@
 const squares = document.querySelectorAll('.square');
-const score = document.querySelector('#score');
-const timeLeft = document.querySelector('#time-left');
+const scoreDisplay = document.querySelector('#score');
+const timeLeftDisplay = document.querySelector('#time-left');
 
 let result = 0;
 let hitPosition;
-let currentTime = 60;
+let currentTime = 60; // Game duration in seconds
 let timerId = null;
-
-// Function to remove mole from all squares
-function removeMole() {
-  squares.forEach(square => {
-    square.classList.remove('mole');
-    const moleImg = square.querySelector('img');
-    if (moleImg) {
-      moleImg.remove(); // Remove the mole image from the square
-    }
-  });
-}
 
 // Function to randomly place the mole in a square
 function randomSquare() {
-  removeMole(); // Remove mole from any previous square
-  
-  // Randomly select a square
-  const randomSquare = squares[Math.floor(Math.random() * squares.length)];
-  randomSquare.classList.add('mole');
+  squares.forEach(square => {
+    const moleImg = square.querySelector('img');
+    if (moleImg) moleImg.remove(); // Clear any existing mole image
+  });
 
-  // Create and append mole image to the selected square
+  // Select a random square
+  const randomSquare = squares[Math.floor(Math.random() * squares.length)];
   const moleImg = document.createElement('img');
-  moleImg.src = 'mole.jpg'; // Updated image path
-  moleImg.style.display = 'block';
+  moleImg.src = 'mole.jpg'; // Ensure this file is in the same folder
   moleImg.style.width = '100%';
   moleImg.style.height = '100%';
   randomSquare.appendChild(moleImg);
 
-  hitPosition = randomSquare.id;
+  hitPosition = randomSquare.id; // Save the ID of the square with the mole
 }
 
-// Add click event listener to each square
+// Add click event listener to detect hits
 squares.forEach(square => {
   square.addEventListener('click', () => {
     if (square.id === hitPosition) {
       result++;
-      score.textContent = result;
-      hitPosition = null;
+      scoreDisplay.textContent = result; // Update score display
+      hitPosition = null; // Reset hitPosition after a successful hit
     }
   });
 });
 
-// Function to move the mole every second
+// Move the mole every second
 function moveMole() {
   timerId = setInterval(randomSquare, 1000);
 }
 
-// Countdown timer for the game
+// Countdown timer
 function countdown() {
   currentTime--;
-  timeLeft.textContent = currentTime;
+  timeLeftDisplay.textContent = currentTime;
 
   if (currentTime === 0) {
     clearInterval(timerId); // Stop mole movement
-    clearInterval(countdownTimerId); // Stop countdown
+    clearInterval(countdownTimerId); // Stop the timer
     alert(`Game Over! Your final score is: ${result}`);
   }
 }
 
-let countdownTimerId = setInterval(countdown, 1000);
-moveMole();
+// Start the game
+let countdownTimerId = setInterval(countdown, 1000); // Start the countdown
+moveMole(); // Start moving the mole
