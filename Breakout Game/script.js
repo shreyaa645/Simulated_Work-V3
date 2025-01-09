@@ -1,6 +1,7 @@
 // Select the game board
 const gameBoard = document.querySelector("#game-board");
 const scoreDisplay = document.getElementById("score");
+const messageDisplay = document.getElementById("message");
 
 // Constants and variables
 const boardWidth = 500;
@@ -77,6 +78,11 @@ function moveBall() {
     ballPosition.x < userPosition.x + 80
   ) {
     ballDirection.y *= -1;
+
+    // Adjust the ball's x direction based on where it hits the paddle
+    const paddleCenter = userPosition.x + 40; // Paddle width is 80
+    const impactPoint = ballPosition.x - paddleCenter;
+    ballDirection.x += impactPoint * 0.1; // Fine-tune this factor for desired realism
   }
 
   // Block collision
@@ -92,13 +98,19 @@ function moveBall() {
       ballDirection.y *= -1;
       score++;
       scoreDisplay.textContent = `Score: ${score}`;
+
+      // Check for win condition
+      if (blocks.length === 0) {
+        clearInterval(ballTimer);
+        messageDisplay.textContent = "🎉 You Win! 🎉";
+      }
     }
   });
 
   // Game over condition
   if (ballPosition.y > boardHeight) {
     clearInterval(ballTimer);
-    alert("Game Over!");
+    messageDisplay.textContent = "Game Over! 😞";
   }
 
   // Update ball position
