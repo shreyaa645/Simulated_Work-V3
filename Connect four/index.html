@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect Four Game</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect Four</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Connect Four</h1>
-        <div class="board">
-            <!-- The board will be dynamically created with JavaScript -->
-        </div>
-        <p class="message">Player 1's turn</p>
+  <div class="container">
+    <h1>Connect Four Challenge</h1>
+    <div class="scoreboard">
+      <p>Player 1 Score: <span id="player1-score">0</span></p>
+      <p>Player 2 Score: <span id="player2-score">0</span></p>
     </div>
-
-    <script src="script.js"></script>
+    
+    <div class="board"></div>
+    <p class="message">Player 1's turn</p>
+    <button class="reset-btn">Restart Game</button>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>

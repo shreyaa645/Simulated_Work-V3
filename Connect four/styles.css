@@ -1,67 +1,115 @@
+/* Body styling */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f8ff; /* Light blue background */
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+    color: #fff;
 }
 
+/* Container styling */
 .container {
     text-align: center;
-    background-color: #ffffff; /* White background for the game box */
-    border: 2px solid #cccccc;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    background: #2d3e50;
+    border-radius: 20px;
+    padding: 30px;
+    width: 600px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
 }
 
+/* Heading */
 h1 {
-    font-size: 2rem;
-    color: #333333;
+    font-size: 2.5rem;
+    color: #ffdd57;
     margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
+/* Scoreboard styling */
+.scoreboard {
+    display: flex;
+    justify-content: space-between;
+    background: #364f6b;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    color: #ffdd57;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Board styling */
 .board {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     grid-template-rows: repeat(6, 1fr);
-    gap: 5px;
-    width: 560px;
-    height: 480px;
-    background-color: #0073e6; /* Bright blue for the board */
-    border: 4px solid #005bb5; /* Darker border */
-    border-radius: 10px;
-    padding: 10px;
+    gap: 8px;
+    width: 500px;
+    height: 450px;
+    background: #2c3e50;
+    border: 4px solid #ffdd57;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 0 auto;
 }
 
+/* Cell styling */
 .cell {
     width: 100%;
     height: 100%;
-    background-color: #e0e0e0; /* Light gray for empty cells */
+    background: #e0e0e0;
     border-radius: 50%;
-    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    transition: transform 0.2s ease-in-out;
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
+/* Cell hover effect */
 .cell:hover {
-    transform: scale(1.1); /* Slightly enlarge cell on hover */
+    transform: scale(1.1);
+    background: #d1d1d1;
 }
 
-.player1 {
-    background-color: #ff4d4d; /* Red for Player 1 */
-    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.2);
+/* Player-specific cells */
+.player-one {
+    background: linear-gradient(135deg, #ff6b6b, #ff0000);
+    box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.2);
 }
 
-.player2 {
-    background-color: #ffd700; /* Yellow for Player 2 */
-    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.2);
+.player-two {
+    background: linear-gradient(135deg, #ffd700, #ffdd57);
+    box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* Message styling */
 .message {
     font-size: 1.5rem;
+    color: #ffdd57;
     margin-top: 20px;
-    color: #333333;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* Reset button styling */
+.reset-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 1.2rem;
+    background: #ff6b6b;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    text-transform: uppercase;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover effect for reset button */
+.reset-btn:hover {
+    background: #ff4b4b;
+    transform: scale(1.1);
 }

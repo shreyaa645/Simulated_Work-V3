@@ -1,91 +1,94 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const board = document.querySelector(".board");
-    const message = document.querySelector(".message");
-    let currentPlayer = 1;
-    const rows = 6;
-    const cols = 7;
-    const grid = [];
+const board = document.querySelector('.board');
+const message = document.querySelector('.message');
+const resetButton = document.querySelector('.reset-btn');
+const player1Score = document.getElementById('player1-score');
+const player2Score = document.getElementById('player2-score');
 
-    // Create the grid dynamically
-    for (let row = 0; row < rows; row++) {
-        grid[row] = [];
-        for (let col = 0; col < cols; col++) {
-            const cell = document.createElement("div");
-            cell.classList.add("cell");
-            grid[row][col] = cell;
-            board.appendChild(cell);
-        }
+let currentPlayer = 'player-one';
+let gameActive = true;
+let scores = { 'player-one': 0, 'player-two': 0 };
+
+// Create the board
+const cells = [];
+for (let i = 0; i < 42; i++) {
+  const cell = document.createElement('div');
+  cell.classList.add('cell');
+  cell.setAttribute('data-id', i);
+  board.appendChild(cell);
+  cells.push(cell);
+}
+
+// Check for winning combinations
+const winningArrays = [
+  /* Horizontal */
+  [0, 1, 2, 3], [1, 2, 3, 4], [2, 3, 4, 5], [3, 4, 5, 6],
+  [7, 8, 9, 10], [8, 9, 10, 11], [9, 10, 11, 12], [10, 11, 12, 13],
+  /* Vertical */
+  [0, 7, 14, 21], [1, 8, 15, 22], [2, 9, 16, 23], [3, 10, 17, 24],
+  /* Diagonal */
+  [3, 9, 15, 21], [2, 8, 14, 20], [1, 7, 13, 19], [0, 8, 16, 24]
+];
+
+function checkBoard() {
+  for (let combo of winningArrays) {
+    const [a, b, c, d] = combo;
+
+    if (
+      cells[a].classList.contains(currentPlayer) &&
+      cells[b].classList.contains(currentPlayer) &&
+      cells[c].classList.contains(currentPlayer) &&
+      cells[d].classList.contains(currentPlayer)
+    ) {
+      message.textContent = `${currentPlayer === 'player-one' ? 'Player 1' : 'Player 2'} Wins! 🎉`;
+      gameActive = false;
+      scores[currentPlayer]++;
+      updateScores();
+      return;
     }
+  }
 
-    // Add click event listener to each cell
-    grid.forEach((row, rowIndex) => {
-        row.forEach((cell, colIndex) => {
-            cell.addEventListener("click", () => {
-                dropPiece(colIndex);
-            });
-        });
-    });
+  // Check for draw
+  if (cells.every(cell => cell.classList.contains('player-one') || cell.classList.contains('player-two'))) {
+    message.textContent = 'It\'s a Draw! 🤝';
+    gameActive = false;
+  }
+}
 
-    // Function to drop a piece into a column
-    function dropPiece(colIndex) {
-        for (let row = rows - 1; row >= 0; row--) {
-            if (!grid[row][colIndex].classList.contains("player1") && !grid[row][colIndex].classList.contains("player2")) {
-                grid[row][colIndex].classList.add(`player${currentPlayer}`);
-                if (checkWin(row, colIndex)) {
-                    message.textContent = `Player ${currentPlayer} wins!`;
-                    disableClicks();
-                    return;
-                }
-                currentPlayer = currentPlayer === 1 ? 2 : 1;
-                message.textContent = `Player ${currentPlayer}'s turn`;
-                return;
-            }
-        }
+function updateScores() {
+  player1Score.textContent = scores['player-one'];
+  player2Score.textContent = scores['player-two'];
+}
+
+// Handle clicks
+board.addEventListener('click', (e) => {
+  if (!gameActive) return;
+
+  const id = parseInt(e.target.getAttribute('data-id'));
+  if (isNaN(id)) return;
+
+  // Find the lowest available cell in the column
+  let availableCell = null;
+  for (let i = id % 7 + 35; i >= 0; i -= 7) {
+    if (!cells[i].classList.contains('player-one') && !cells[i].classList.contains('player-two')) {
+      availableCell = cells[i];
+      break;
     }
+  }
 
-    // Function to check for a win
-    function checkWin(row, col) {
-        const directions = [
-            [0, 1],   // horizontal
-            [1, 0],   // vertical
-            [1, 1],   // diagonal /
-            [-1, 1]   // diagonal \
-        ];
-
-        for (let dir of directions) {
-            let count = 1;
-            const [dirRow, dirCol] = dir;
-            let r = row + dirRow;
-            let c = col + dirCol;
-            
-            while (r >= 0 && r < rows && c >= 0 && c < cols && grid[r][c].classList.contains(`player${currentPlayer}`)) {
-                count++;
-                r += dirRow;
-                c += dirCol;
-            }
-
-            r = row - dirRow;
-            c = col - dirCol;
-            while (r >= 0 && r < rows && c >= 0 && c < cols && grid[r][c].classList.contains(`player${currentPlayer}`)) {
-                count++;
-                r -= dirRow;
-                c -= dirCol;
-            }
-
-            if (count >= 4) {
-                return true;
-            }
-        }
-
-        return false;
+  if (availableCell) {
+    availableCell.classList.add(currentPlayer);
+    checkBoard();
+    if (gameActive) {
+      currentPlayer = currentPlayer === 'player-one' ? 'player-two' : 'player-one';
+      message.textContent = `${currentPlayer === 'player-one' ? 'Player 1' : 'Player 2'}'s turn`;
     }
+  }
+});
 
-    // Function to disable further clicks after someone wins
-    function disableClicks() {
-        grid.forEach(row => {
-            row.forEach(cell => {
-                cell.removeEventListener("click", dropPiece);
-            });
-        });
-    }
+// Reset the game
+resetButton.addEventListener('click', () => {
+  cells.forEach(cell => cell.classList.remove('player-one', 'player-two'));
+  currentPlayer = 'player-one';
+  message.textContent = 'Player 1\'s turn';
+  gameActive = true;
 });
