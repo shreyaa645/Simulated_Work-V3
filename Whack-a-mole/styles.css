@@ -1,11 +1,17 @@
+
 body {
   font-family: Arial, sans-serif;
   text-align: center;
-  background-color: #b87115;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+  color: white;
 }
 
 h1, h2 {
   margin-bottom: 20px;
+  color: white;
 }
 
 .grid {
@@ -19,9 +25,15 @@ h1, h2 {
 .square {
   width: 100px;
   height: 100px;
-  background-color: #ddd;
-  border: 1px solid #ccc;
+  background-color: #9c6145;
+  border: 2px solid #893400;
   position: relative;
+  transition: background 0.3s ease;
+}
+
+.square:hover {
+  background-color: #b86608;
+  cursor: pointer;
 }
 
 .square img {
