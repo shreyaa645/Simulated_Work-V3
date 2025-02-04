@@ -1,83 +1,69 @@
-// Score variables
-let playerScore = 0;
-let computerScore = 0;
-
-// Choices array
+let playerWins = 0;
+let computerWins = 0;
+let ties = 0;
 const choices = ["rock", "paper", "scissors"];
 
-// Function to get computer choice
 function getComputerChoice() {
-    const randomIndex = Math.floor(Math.random() * choices.length);
-    return choices[randomIndex];
+    return choices[Math.floor(Math.random() * choices.length)];
 }
 
-// Function to determine the winner
 function determineWinner(playerChoice, computerChoice) {
-    if (playerChoice === computerChoice) {
-        return "It's a tie!";
-    } else if (
+    if (playerChoice === computerChoice) return "It's a tie!";
+    if (
         (playerChoice === "rock" && computerChoice === "scissors") ||
         (playerChoice === "paper" && computerChoice === "rock") ||
         (playerChoice === "scissors" && computerChoice === "paper")
     ) {
         return "You win!";
-    } else {
-        return "Computer wins!";
     }
+    return "Computer wins!";
 }
 
-// Function to update scores and display them
 function updateScores(result) {
     if (result === "You win!") {
-        playerScore++;
+        playerWins++;
     } else if (result === "Computer wins!") {
-        computerScore++;
-    }
-
-    document.getElementById("player-score").innerText = `Player: ${playerScore}`;
-    document.getElementById("computer-score").innerText = `Computer: ${computerScore}`;
-}
-
-// Function to highlight the result
-function highlightWinner(result) {
-    const resultElement = document.getElementById("game-result");
-    if (result === "You win!") {
-        resultElement.style.color = "green";
-    } else if (result === "Computer wins!") {
-        resultElement.style.color = "red";
+        computerWins++;
     } else {
-        resultElement.style.color = "gray";
+        ties++;
+    }
+    document.getElementById("player-score").innerText = `Player Wins: ${playerWins}`;
+    document.getElementById("computer-score").innerText = `Computer Wins: ${computerWins}`;
+    document.getElementById("tie-score").innerText = `Ties: ${ties}`;
+}
+
+function playResultSound(result) {
+    if (result === "You win!") {
+        document.getElementById("win-sound").play();
+    } else if (result === "Computer wins!") {
+        document.getElementById("lose-sound").play();
+    } else {
+        document.getElementById("tie-sound").play();
     }
 }
 
-// Function to handle game play
 function playGame(playerChoice) {
     const computerChoice = getComputerChoice();
     const result = determineWinner(playerChoice, computerChoice);
-
-    // Update UI with choices and results
+    
     document.getElementById("player-choice").innerText = `Player's Choice: ${playerChoice}`;
     document.getElementById("computer-choice").innerText = `Computer's Choice: ${computerChoice}`;
     document.getElementById("game-result").innerText = `Result: ${result}`;
-
-    // Update scores and highlight winner
+    
     updateScores(result);
-    highlightWinner(result);
+    playResultSound(result);
 }
 
-// Add event listeners to choice buttons
 document.getElementById("rock").addEventListener("click", () => playGame("rock"));
 document.getElementById("paper").addEventListener("click", () => playGame("paper"));
 document.getElementById("scissors").addEventListener("click", () => playGame("scissors"));
 
-// Reset the game
 document.getElementById("reset").addEventListener("click", () => {
-    playerScore = 0;
-    computerScore = 0;
-
+    playerWins = 0;
+    computerWins = 0;
+    ties = 0;
     document.getElementById("player-choice").innerText = "Player's Choice: ";
     document.getElementById("computer-choice").innerText = "Computer's Choice: ";
     document.getElementById("game-result").innerText = "Result: ";
-    document.getElementById("player-score").innerText = "Player: 0";
-    document.getElementById("computer-score").innerText = "Computer: 0";
+    updateScores("");
 });
